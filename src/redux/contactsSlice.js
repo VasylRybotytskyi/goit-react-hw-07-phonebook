@@ -6,6 +6,13 @@ const initialState = {
   error: null,
 };
 
+const handlePending = state => {
+  return {
+    ...state,
+    isLoading: true,
+  };
+};
+
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState,
