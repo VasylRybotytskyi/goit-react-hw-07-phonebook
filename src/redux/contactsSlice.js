@@ -13,18 +13,51 @@ const handlePending = state => {
   };
 };
 
+const handleRejected = (state, { payload }) => {
+  return {
+    ...state,
+    isLoading: false,
+    error: payload,
+  };
+};
+
+const handleFetchContactsSuccess = (state, { payload }) => {
+  return { ...state, isLoading: false, error: null, items: payload };
+};
+
+const handleAddContactSuccess = (state, action) => {
+  return {
+    ...state,
+    isLoading: false,
+    error: null,
+    items: [action.payload, ...state.items],
+  };
+};
+
+const handleDeleteContactSuccess = (state, action) => {
+  return {
+    ...state,
+    isLoading: false,
+    error: null,
+    items: state.items.filter(item => item.id !== action.payload.id),
+  };
+};
+
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState,
-  reducers: {
-    addContact: (state, action) => {
-      state.items = [...state.items, action.payload];
-    },
-    deleteContact: (state, action) => {
-      state.items = state.items.filter(item => item.id !== action.payload); // видаляємо елемент з масиву по id
-    },
+  extraReducers: builder => {
+    builder.addCase();
   },
 });
-
-export const { addContact, deleteContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
+
+// [fetchContacts.pending]: handlePending,
+// [addContact.pending]: handlePending,
+// [deleteContact.pending]: handlePending,
+// [fetchContacts.rejected]: handleRejected,
+// [addContact.rejected]: handleRejected,
+// [deleteContact.rejected]: handleRejected,
+// [fetchContacts.fulfilled]: handleFetchContactsSuccess,
+// [addContact.fulfilled]: handleAddContactSuccess,
+// [deleteContact.fulfilled]: handleDeleteContactSuccess,
