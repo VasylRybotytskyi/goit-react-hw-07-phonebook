@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/contactsSlice';
+import { addContactThunk } from 'services/fetch';
 import { getContacts } from '../../redux/selectors';
 import { nanoid } from 'nanoid';
 import {
@@ -30,7 +30,7 @@ export function ContactForm() {
     }
 
     const newContact = { id: nanoid(), ...values };
-    dispatch(addContact(newContact));
+    dispatch(addContactThunk(newContact));
 
     resetForm(); // Очистка полів форми
   };

@@ -63,4 +63,5 @@ const contactsSlice = createSlice({
     builder.addCase(deleteContactThunk.fulfilled, handleDeleteContactSuccess);
   },
 });
+
 export const contactsReducer = contactsSlice.reducer;
