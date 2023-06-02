@@ -26,7 +26,7 @@ export function ContactForm() {
 
     if (existingContact) {
       alert(`${name} is already in contacts.`);
-      return;
+      resetForm(); // Очистка полів форми
     }
 
     const newContact = { id: nanoid(), ...values };
