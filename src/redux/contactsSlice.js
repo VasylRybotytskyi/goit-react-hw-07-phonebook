@@ -1,4 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {
+  getContactsThunk,
+  addContactsThunk,
+  deleteContactsThunk,
+} from './thunk';
 
 const initialState = {
   items: [],
@@ -47,17 +52,15 @@ const contactsSlice = createSlice({
   name: 'contacts',
   initialState,
   extraReducers: builder => {
-    builder.addCase();
+    builder.addCase(getContactsThunk.pending, handlePending);
+    builder.addCase(addContactsThunk.pending, handlePending);
+    builder.addCase(deleteContactsThunk.pending, handlePending);
+    builder.addCase(getContactsThunk.rejected, handleRejected);
+    builder.addCase(addContactsThunk.rejected, handleRejected);
+    builder.addCase(deleteContactsThunk.rejected, handleRejected);
+    builder.addCase(getContactsThunk.fulfilled, handleFetchContactsSuccess);
+    builder.addCase(addContactsThunk.fulfilled, handleAddContactSuccess);
+    builder.addCase(deleteContactsThunk.fulfilled, handleDeleteContactSuccess);
   },
 });
 export const contactsReducer = contactsSlice.reducer;
-
-// [fetchContacts.pending]: handlePending,
-// [addContact.pending]: handlePending,
-// [deleteContact.pending]: handlePending,
-// [fetchContacts.rejected]: handleRejected,
-// [addContact.rejected]: handleRejected,
-// [deleteContact.rejected]: handleRejected,
-// [fetchContacts.fulfilled]: handleFetchContactsSuccess,
-// [addContact.fulfilled]: handleAddContactSuccess,
-// [deleteContact.fulfilled]: handleDeleteContactSuccess,
