@@ -1,7 +1,8 @@
 import { ContactItemWrapper, DeleteButton } from './ContactListItem.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getFilter } from '../../redux/selectors';
-import { deleteContactThunk } from 'services/fetch';
+import { deleteContactThunk, getContactThunk } from 'services/fetch';
+import { useEffect } from 'react';
 
 export const ContactListItem = () => {
   const contacts = useSelector(getContacts);
@@ -15,6 +16,9 @@ export const ContactListItem = () => {
   const onDeleteContact = id => {
     dispatch(deleteContactThunk(id));
   };
+  useEffect(() => {
+    dispatch(getContactThunk());
+  }, [dispatch]);
 
   return (
     <>
