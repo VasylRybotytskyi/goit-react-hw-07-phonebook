@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  getContactsThunk,
-  addContactsThunk,
-  deleteContactsThunk,
-} from './thunk';
+  addContactThunk,
+  deleteContactThunk,
+  getContactThunk,
+} from 'services/fetch';
 
 const initialState = {
   items: [],
@@ -52,15 +52,15 @@ const contactsSlice = createSlice({
   name: 'contacts',
   initialState,
   extraReducers: builder => {
-    builder.addCase(getContactsThunk.pending, handlePending);
-    builder.addCase(addContactsThunk.pending, handlePending);
-    builder.addCase(deleteContactsThunk.pending, handlePending);
-    builder.addCase(getContactsThunk.rejected, handleRejected);
-    builder.addCase(addContactsThunk.rejected, handleRejected);
-    builder.addCase(deleteContactsThunk.rejected, handleRejected);
-    builder.addCase(getContactsThunk.fulfilled, handleFetchContactsSuccess);
-    builder.addCase(addContactsThunk.fulfilled, handleAddContactSuccess);
-    builder.addCase(deleteContactsThunk.fulfilled, handleDeleteContactSuccess);
+    builder.addCase(getContactThunk.pending, handlePending);
+    builder.addCase(addContactThunk.pending, handlePending);
+    builder.addCase(deleteContactThunk.pending, handlePending);
+    builder.addCase(getContactThunk.rejected, handleRejected);
+    builder.addCase(addContactThunk.rejected, handleRejected);
+    builder.addCase(deleteContactThunk.rejected, handleRejected);
+    builder.addCase(getContactThunk.fulfilled, handleFetchContactsSuccess);
+    builder.addCase(addContactThunk.fulfilled, handleAddContactSuccess);
+    builder.addCase(deleteContactThunk.fulfilled, handleDeleteContactSuccess);
   },
 });
 export const contactsReducer = contactsSlice.reducer;
